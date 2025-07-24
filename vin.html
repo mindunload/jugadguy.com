@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VIN Lookup & Decode</title>
+</head>
+<body>
+  <h2>Enter VIN</h2>
+  <input type="text" id="vin" placeholder="17-character VIN">
+  <button onclick="lookupVin()">Go</button>
+
+  <h3>Decoded Vehicle Info:</h3>
+  <pre id="output"></pre>
+
+  <script>
+    async function lookupVin() {
+      const vin = document.getElementById("vin").value.trim();
+      if (vin.length !== 17) {
+        alert("Please enter a valid 17-character VIN.");
+        return;
+      }
+
+      // Open Toyota sticker page
+      window.open(`https://www.toyota.checkeredflag.com/dealer-inspire-inventory/window-stickers/toyota?vin=${vin}`, "_blank");
+
+      // Fetch decoded data from NHTSA
+      const response = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValuesExtended/${vin}?format=json`);
+      const data = await response.json();
+
+      // Display key vehicle info
+      const result = data.Results[0];
+      const output = `
+Make: ${result.Make}
+Model: ${result.Model}
+Year: ${result.ModelYear}
+Engine: ${result.EngineCylinders} Cylinders
+Body Style: ${result.BodyClass}
+Plant: ${result.PlantCity}, ${result.PlantCountry}
+      `;
+      document.getElementById("output").textContent = output;
+    }
+  </script>
+</body>
+</html>
