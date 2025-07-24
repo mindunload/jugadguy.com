@@ -29,12 +29,26 @@
       // Display key vehicle info
       const result = data.Results[0];
       const output = `
-Make: ${result.Make}
-Model: ${result.Model}
-Year: ${result.ModelYear}
-Engine: ${result.EngineCylinders} Cylinders
-Body Style: ${result.BodyClass}
-Plant: ${result.PlantCity}, ${result.PlantCountry}
+          Make: ${result.Make}
+          Model: ${result.Model}
+          Year: ${result.ModelYear}
+          Engine: ${result.EngineCylinders} Cylinders
+          Body Style: ${result.BodyClass}
+          Plant: ${result.PlantCity}, ${result.PlantCountry}
+          Engine HP: ${result.EngineHP}
+          AdaptiveCruiseControl: ${result.AdaptiveCruiseControl}
+          Air Bag: ${result.AirBagLocCurtain}, ${result.AirBagLocCurtain}, ${result.AirBagLocFront}, ${result.AirBagLocKnee}, ${result.AirBagLocSide}
+          Battery Info: ${result.BatteryInfo}, BatteryCells: ${result.BatteryCells}
+          BatteryType: ${result.BatteryType}
+          ElectrificationLevel: ${result.ElectrificationLevel}
+          GVWR: ${result.GVWR}
+          Body Style: ${result.BodyClass}
+          Body Style: ${result.BodyClass}
+          Body Style: ${result.BodyClass}
+          Body Style: ${result.BodyClass}
+          Body Style: ${result.BodyClass}
+          Body Style: ${result.BodyClass}
+          Body Style: ${result.BodyClass}          
       `;
       document.getElementById("output").textContent = output;
     }
