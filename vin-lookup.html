@@ -1,24 +1,29 @@
-from flask import Flask, request, redirect, render_template_string
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VIN Lookup</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    input, button { font-size: 1rem; padding: 0.5rem; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h2>Check Toyota Window Sticker</h2>
+  <label for="vin">Enter VIN:</label><br>
+  <input type="text" id="vin" placeholder="e.g. 5TDYZ3DC0LS123456"><br>
+  <button onclick="goToSticker()">View Sticker</button>
 
-app = Flask(__name__)
-
-HTML = '''
-<form method="POST">
-  <label>Enter VIN:</label><br>
-  <input name="vin" type="text" placeholder="e.g. 5TDYZ3DC0LS123456"><br>
-  <button type="submit">View Sticker</button>
-</form>
-'''
-
-@app.route('/', methods=['GET', 'POST'])
-def vin_lookup():
-    if request.method == 'POST':
-        vin = request.form['vin'].strip()
-        if len(vin) == 17:
-            return redirect(f'https://www.toyota.checkeredflag.com/dealer-inspire-inventory/window-stickers/toyota?vin={vin}')
-        else:
-            return HTML + "<p style='color:red;'>Invalid VIN</p>"
-    return HTML
-
-if __name__ == '__main__':
-    app.run(debug=True)
+  <script>
+    function goToSticker() {
+      const vin = document.getElementById("vin").value.trim();
+      if (vin.length === 17) {
+        const url = `https://www.toyota.checkeredflag.com/dealer-inspire-inventory/window-stickers/toyota?vin=${vin}`;
+        window.open(url, "_blank");
+      } else {
+        alert("Please enter a valid 17-character VIN.");
+      }
+    }
+  </script>
+</body>
+</html>
